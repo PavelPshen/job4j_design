@@ -40,7 +40,7 @@ class SimpleConvertTest {
         Set<String> set = simpleConvert.toSet("first", "second", "three", "four", "five", "second");
         assertThat(set).hasSize(5)
                 .element(4).isNotNull()
-                .isEqualTo("second");;
+                .isEqualTo("second");
     }
 
     @Test
@@ -48,7 +48,7 @@ class SimpleConvertTest {
         SimpleConvert simpleConvert = new SimpleConvert();
         Map<String, Integer> map = simpleConvert.toMap("first", "second", "three");
         assertThat(map).containsKeys("three")
-                .containsValues(2)
+                .containsValues(2).containsKeys("first").containsKeys("first").containsKeys("first").containsKeys("first").containsKeys("first")
                 .containsEntry("second", 1);
     }
 }
