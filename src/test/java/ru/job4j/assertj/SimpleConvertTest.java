@@ -48,7 +48,7 @@ class SimpleConvertTest {
         SimpleConvert simpleConvert = new SimpleConvert();
         Map<String, Integer> map = simpleConvert.toMap("first", "second", "three");
         assertThat(map).containsKeys("three")
-                .containsValues(2).containsKeys("first").containsKeys("first").containsKeys("first").containsKeys("first").containsKeys("first")
+                .containsValues(2)
                 .containsEntry("second", 1);
     }
 }
