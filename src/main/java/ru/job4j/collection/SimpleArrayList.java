@@ -12,7 +12,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         container = (T[]) new Object[capacity];
     }
 
-    public void growSimpleArrayList() {
+    private void growSimpleArrayList() {
         container = Arrays.copyOf(container, container.length == 0 ? 10 : container.length * 2);
     }
 
