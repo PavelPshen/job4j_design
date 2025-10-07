@@ -3,26 +3,22 @@ package ru.job4j.collection;
 public class SimpleQueue<T> {
     private final SimpleStack<T> input = new SimpleStack<>();
     private final SimpleStack<T> output = new SimpleStack<>();
-    int sizeInput;
-    int sizeOutput;
+    private int sizeOutput;
+    private int sizeInput;
 
     public T poll() {
-        if (sizeInput == 0) {
+        if (sizeInput + sizeOutput == 0) {
             throw new java.util.NoSuchElementException("Queue is empty");
         }
-        T result;
-        sizeOutput = sizeInput;
-        while (sizeOutput > 0) {
-            output.push(input.pop());
-            sizeOutput--;
+        if (sizeOutput == 0) {
+            while (sizeInput > 0) {
+                output.push(input.pop());
+                sizeOutput++;
+                sizeInput--;
+            }
         }
-        result = output.pop();
-        sizeInput--;
-        while (sizeOutput < sizeInput) {
-            input.push(output.pop());
-            sizeOutput++;
-        }
-        return result;
+        sizeOutput--;
+        return output.pop();
     }
 
     public void push(T value) {
