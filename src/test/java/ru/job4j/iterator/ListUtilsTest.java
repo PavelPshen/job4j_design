@@ -43,7 +43,7 @@ class ListUtilsTest {
 
     @Test
     void whenRemoveIf() {
-        Predicate<Integer> isEvenNumber = x -> x % 2==0;
+        Predicate<Integer> isEvenNumber = x -> x % 2 == 0;
         ListUtils.addAfter(input, 0, 2);
         assertThat(input).hasSize(3).containsSequence(1, 2, 3);
         ListUtils.removeIf(input, isEvenNumber);
@@ -52,7 +52,7 @@ class ListUtilsTest {
 
     @Test
     void whenRemoveIfMultipleNumbers() {
-        Predicate<Integer> isEvenNumber = x -> x % 3==0;
+        Predicate<Integer> isEvenNumber = x -> x % 3 == 0;
         input.add(4);
         input.add(5);
         input.add(6);
@@ -74,7 +74,7 @@ class ListUtilsTest {
 
     @Test
     void whenReplaceIfMultipleNumbers() {
-        Predicate<Integer> isEvenNumber = x -> x % 3==0;
+        Predicate<Integer> isEvenNumber = x -> x % 3 == 0;
         input.add(4);
         input.add(5);
         input.add(6);
