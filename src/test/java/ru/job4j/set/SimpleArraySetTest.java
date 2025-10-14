@@ -37,4 +37,15 @@ class SimpleArraySetTest {
         assertThat(set.contains(null)).isTrue();
         assertThat(set.add(null)).isFalse();
     }
+
+    @Test
+    void whenAddElementAndNull() {
+        SimpleSet<Integer> set = new SimpleArraySet<>();
+        assertThat(set.add(1)).isTrue();
+        assertThat(set.add(null)).isTrue();
+        assertThat(set.add(2)).isTrue();
+        assertThat(set.contains(null)).isTrue();
+        assertThat(set.contains(2)).isTrue();
+
+    }
 }
