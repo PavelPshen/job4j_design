@@ -15,8 +15,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
-        int hash = hash(Objects.hashCode(key));
-        int index = indexFor(hash);
+        int index = calculateIndex(key);
         if (table[index] != null) {
             return false;
         } else {
@@ -29,32 +28,20 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public V get(K key) {
-        int hash = (Objects.hashCode(key));
-        int index = indexFor(hash);
-        if (table[index] != null) {
-            K checkKey = table[index].key;
-            if (Objects.hashCode(checkKey) == Objects.hashCode(key)) {
-                if (Objects.equals(checkKey, key)) {
-                    return table[index].value;
-                }
-            }
+        int index = calculateIndex(key);
+        if (compareKey(key, index)) {
+            return table[index].value;
         }
         return null;
     }
 
     @Override
     public boolean remove(K key) {
-        int hash = (Objects.hashCode(key));
-        int index = indexFor(hash);
-        if (table[index] != null) {
-            K checkKey = table[index].key;
-            if (Objects.hashCode(checkKey) == Objects.hashCode(key)) {
-                if (Objects.equals(checkKey, key)) {
-                    table[index] = null;
-                    modCount++;
-                    return true;
-                }
-            }
+        int index = calculateIndex(key);
+        if (compareKey(key, index)) {
+            table[index] = null;
+            modCount++;
+            return true;
         }
         return false;
     }
@@ -87,12 +74,28 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private int hash(int hashCode) {
-        int h = hashCode;
-        return (h == 0) ? 0 : (h) ^ (h >>> 16);
+        return (hashCode) ^ (hashCode >>> 16);
     }
 
     private int indexFor(int hash) {
         return hash & (capacity - 1);
+    }
+
+    private int calculateIndex(K key) {
+        int hash = (Objects.hashCode(key));
+        return indexFor(hash);
+    }
+
+    private boolean compareKey(K key, int index) {
+        if (table[index] != null) {
+            K checkKey = table[index].key;
+            if (Objects.hashCode(checkKey) == Objects.hashCode(key)) {
+                if (Objects.equals(checkKey, key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void expand() {
