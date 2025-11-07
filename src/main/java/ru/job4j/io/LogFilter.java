@@ -1,12 +1,9 @@
 package ru.job4j.io;
 
-import javax.xml.stream.events.DTD;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LogFilter {
     private final String file;
@@ -27,9 +24,23 @@ public class LogFilter {
         return result;
     }
 
+    public void saveTo(String out) {
+        var data = filter();
+        try (PrintWriter output = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(out)
+                ))) {
+            for (String lines : data) {
+                output.printf("%s%n", lines);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter("data/log.txt");
         logFilter.filter().forEach(System.out::println);
-
+        new LogFilter("data/log.txt").saveTo("data/404.txt");
     }
 }
