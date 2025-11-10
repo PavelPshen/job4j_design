@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.file.Path;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
 class AnalysisTest {
 
     @Test
