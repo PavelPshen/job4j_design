@@ -43,6 +43,7 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("пробел возле знака =");
     }
+
     @Test
     void whenPairNotUsePatternEqualSign() {
         String path = "./data/pair_with_pattern_without_equal_sign_fail.properties";
@@ -51,6 +52,7 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("нет знака =");
     }
+
     @Test
     void whenPairNotUsePatternKeyEmpty() {
         String path = "./data/pair_with_pattern_key_empty_fail.properties";
@@ -59,6 +61,7 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("нет ключа или значения");
     }
+
     @Test
     void whenPairNotUsePatternValueEmpty() {
         String path = "./data/pair_with_pattern_value_empty_fail.properties";
