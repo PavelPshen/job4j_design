@@ -9,14 +9,16 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    private HashMap<FileProperty, Path> mapPath = new HashMap<>();
-    private HashMap<FileProperty, TreeSet<String>> mapResult = new HashMap<>();
+    // private Map<FileProperty, Path> mapPath = new HashMap<>();
+    private Map<FileProperty, Set<String>> mapResult = new HashMap<>();
 
     public void printResult() {
         for (FileProperty duplicate : mapResult.keySet()) {
-            System.out.println(duplicate.getName() + " - " + duplicate.getSize() + " byte");
-            for (String path : mapResult.get(duplicate)) {
-                System.out.println(path);
+            if (mapResult.get(duplicate).size() > 1) {
+                System.out.println(duplicate.getName() + " - " + duplicate.getSize() + " byte");
+                for (String path : mapResult.get(duplicate)) {
+                    System.out.println(path);
+                }
             }
         }
     }
@@ -26,14 +28,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                                      BasicFileAttributes attributes) throws IOException {
         FileProperty fileProperty = new FileProperty(attributes.size(),
                 file.getFileName().toString());
-            if (mapPath.containsKey(fileProperty)) {
-                TreeSet<String> set = mapResult.getOrDefault(fileProperty, new TreeSet<>());
-                set.add(mapPath.get(fileProperty).toAbsolutePath().toString());
-                set.add(file.toAbsolutePath().toString());
-                mapResult.put(fileProperty, set);
-            } else {
-                mapPath.put(fileProperty, file);
-            }
+        mapResult.computeIfAbsent(fileProperty, k -> new TreeSet<>())
+                .add(file.toAbsolutePath().toString());
         return super.visitFile(file, attributes);
     }
 }
