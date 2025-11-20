@@ -9,8 +9,21 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("./src/main/java/ru/job4j");
-        search(start, path -> path.toFile().getName().endsWith(".java")).forEach(System.out::println);
+        validTest(args);
+        Path start = Paths.get(args[0]);
+        search(start, path -> path.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+    }
+
+    private static void validTest(String[] args) {
+        if (args.length < 2) {
+            throw new IllegalArgumentException("args is null.");
+        }
+        if (!args[0].startsWith("C:")) {
+            throw new IllegalArgumentException("Need disk C args");
+        }
+        if (!args[1].contains(".")) {
+            throw new IllegalArgumentException("Need format file with '.' ");
+        }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {

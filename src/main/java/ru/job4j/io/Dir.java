@@ -8,7 +8,10 @@ import java.nio.file.SimpleFileVisitor;
 
 public class Dir extends SimpleFileVisitor<Path> {
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\projects");
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
+        }
+        File file = new File(args[0]);
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Директория не существует: %s", file.getAbsoluteFile()));
         }
