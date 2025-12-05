@@ -22,15 +22,15 @@ public class ConsoleChat {
         Random random = new Random();
         String massage = "";
         Scanner input = new Scanner(System.in);
-        while (!massage.equals(OUT)) {
+        while (!OUT.equals(massage)) {
             massage = input.nextLine();
             log.add("User: " + massage);
             switch (massage) {
                 case (STOP) :
-                    while (!massage.equals(CONTINUE)) {
+                    while (!CONTINUE.equals(massage)) {
                         massage = input.nextLine();
                         log.add("User: " + massage);
-                        if (massage.equals(OUT)) {
+                        if (OUT.equals(massage)) {
                             break;
                         }
                     }
