@@ -44,16 +44,16 @@ public class CSVReader {
             throw new IllegalArgumentException("Указаны не все аргументы");
         }
         if (!args[0].startsWith("-path")) {
-            throw new IllegalArgumentException("неверно обозгачение первого входного параметра");
+            throw new IllegalArgumentException("неверно обозначение первого входного параметра");
         }
         if (!args[1].startsWith("-delimiter")) {
-            throw new IllegalArgumentException("неверно обозгачение второго входного параметра");
+            throw new IllegalArgumentException("неверно обозначение второго входного параметра");
         }
         if (!args[2].startsWith("-out")) {
-            throw new IllegalArgumentException("неверно обозгачение третьего входного параметра");
+            throw new IllegalArgumentException("неверно обозначение третьего входного параметра");
         }
         if (!args[3].startsWith("-filter")) {
-            throw new IllegalArgumentException("неверно обозгачение четвртого входного параметра");
+            throw new IllegalArgumentException("неверно обозначение четвртого входного параметра");
         }
         ArgsName argsName = ArgsName.of(args);
         handle(argsName);
