@@ -13,5 +13,6 @@ public class UsageLog4j {
         LOG.info("info message");
         LOG.warn("warn message");
         LOG.error("error message");
+
     }
 }
