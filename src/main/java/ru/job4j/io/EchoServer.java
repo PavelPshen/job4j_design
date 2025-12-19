@@ -13,9 +13,9 @@ public class EchoServer {
                      BufferedReader input = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String answer = "";
-                    String line = input.readLine();
-                    if (line.contains("msg=")) {
-                        String request = line;
+                    String inputLine = input.readLine();
+                    if (inputLine.contains("msg=")) {
+                        String request = inputLine;
                         String massage = request.substring(request.indexOf("msg=") + 4, request.indexOf(" HTTP"));
                         System.out.println(massage);
                         switch (massage) {
