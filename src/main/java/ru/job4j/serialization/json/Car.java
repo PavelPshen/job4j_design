@@ -17,6 +17,26 @@ public class Car {
         this.equipments = equipments;
     }
 
+    public boolean getType() {
+        return type;
+    }
+
+    public int getDoorCounter() {
+        return doorCounter;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public String[] getEquipments() {
+        return equipments;
+    }
+
     @Override
     public String toString() {
         return "Car{"
